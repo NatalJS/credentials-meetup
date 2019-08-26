@@ -42,7 +42,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.s[ac]ss$/i,
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
@@ -57,6 +57,18 @@ module.exports = {
               sourceMap: true,
             },
           },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
+          'css-loader',
         ],
       },
       {
